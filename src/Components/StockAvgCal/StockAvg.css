@@ -1,0 +1,74 @@
+.stockavg_result{
+    margin: 10px auto 0 auto;
+    box-shadow: 3px 3px 10px black;
+    border-radius: 5px;
+    padding: 20px 5px 2px 10px;
+    width: 90%;
+}
+.stockavg_result h6, .Sipcal h6{
+    margin-bottom: 20px;
+    color: #44475b;
+}
+.stockavg_result span, .Sipcal span{
+    font-size: 20px;
+    font-weight: 600;
+    float: right;
+    padding-right: 20px;
+    color: black;
+}
+.Sipcal{
+    margin: 20px 0 0 20px;
+    box-shadow: 3px 3px 10px black;
+    padding: 20px 5px 2px 10px;
+    border-radius: 5px;
+}
+
+.chart{
+    margin: 10px auto;
+}
+.AI:before{
+    position: absolute;
+    top: 7px;
+    left: -20px;
+    content: '';
+    width: 15px;
+    border-radius: 20px;
+    height: 6px;
+    background-color: #0088FE;
+}
+.TG:before{
+    position: absolute;
+    top: 7px;
+    left: -20px;
+    content: '';
+    width: 15px;
+    border-radius: 20px;
+    height: 6px;
+    background-color: #00C49F;
+}
+.AI, .TG{
+    position: relative;
+}
+
+.MuiTypography-root.MuiTypography-body1.css-1pnmrwp-MuiTypography-root{
+    color: #2e7d32;
+}
+.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedStart, .MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedEnd{
+    color: #2e7d32;
+    font-weight: 600;
+    padding: 5px 10px;
+}
+
+.CAGR{
+    background-color: #8bd690;
+    padding: 15px;
+    border-radius: 5px;
+}
+.CAGR h5{
+    margin: 0;
+}
+.CAGR span{
+    color: #0b530e;
+    padding-left: 5px;
+    font-size: 26px;
+}
