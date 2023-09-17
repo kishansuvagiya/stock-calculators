@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/StockAverage/static/css/main.35d14ff4.css",
+    "main.js": "/StockAverage/static/js/main.bd11c285.js",
+    "static/js/787.8b950cb7.chunk.js": "/StockAverage/static/js/787.8b950cb7.chunk.js",
+    "index.html": "/StockAverage/index.html",
+    "main.35d14ff4.css.map": "/StockAverage/static/css/main.35d14ff4.css.map",
+    "main.bd11c285.js.map": "/StockAverage/static/js/main.bd11c285.js.map",
+    "787.8b950cb7.chunk.js.map": "/StockAverage/static/js/787.8b950cb7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35d14ff4.css",
+    "static/js/main.bd11c285.js"
+  ]
+}
