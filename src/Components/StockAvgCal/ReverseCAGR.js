@@ -5,78 +5,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Tooltip, PieChart, Pie, Cell, Sector } from 'recharts';
 
-const renderActiveShape = (props) => {
-    const RADIAN = Math.PI / 180;
-    const {
-        cx,
-        cy,
-        midAngle,
-        innerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        fill,
-        payload,
-        percent,
-        value
-    } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
-
-    return (
-        <g>
-            <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-                {payload.name}
-            </text>
-            <Sector
-                cx={cx}
-                cy={cy}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                fill='#00C49F'
-            />
-            <Sector
-                cx={cx}
-                cy={cy}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                innerRadius={outerRadius + 6}
-                outerRadius={outerRadius + 12}
-                fill='#00C49F'
-            />
-            <path
-                d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-                stroke={fill}
-                fill="none"
-            />
-            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                textAnchor={textAnchor}
-                fill="#333"
-            >{`₹ ${value}`}</text>
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                dy={18}
-                textAnchor={textAnchor}
-                fill="#999"
-            >
-                {`(${(percent * 100).toFixed(2)}%)`}
-            </text>
-        </g>
-    );
-};
 
 function ReverseCAGR() {
     const [data, setData] = useState({
@@ -97,28 +25,19 @@ function ReverseCAGR() {
         let lastThree = x.substring(x.length - 3);
         let otherNumbers = x.substring(0, x.length - 3);
         if (otherNumbers != '') {
-          lastThree = ',' + lastThree;
+            lastThree = ',' + lastThree;
         }
         let res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
         return res;
-      }
+    }
 
     let FV = Math.round(data.initialAmount * Math.pow((data.CAGR / 100) + 1, (data.duration)))
-    let total = data.initialAmount + FV
 
     const data02 = [
         { name: "Initial Value", value: data.initialAmount },
-        { name: "Return", value: FV - data.initialAmount }
+        { name: "Final Value", value: FV}
     ];
-    // const COLORS = ["#0088FE", "#00C49F"];
-
-    const [activeIndex, setActiveIndex] = useState(0);
-    const onPieEnter = useCallback(
-        (_, index) => {
-            setActiveIndex(index);
-        },
-        [setActiveIndex]
-    );
+    const COLORS = ["#0088FE", "#00C49F"];
 
     return (
         <div>
@@ -171,41 +90,28 @@ function ReverseCAGR() {
                         </div>
 
                         <div className='col-md-6 mt-4 mt-md-0'>
-                            {/* <div className='text-center mt-3'>
-                            <span className='AI'>Initial Value</span>
-                            <span className='TG ms-5'>Final Value</span>
-                        </div> */}
+                            <div className='text-center mt-3'>
+                                <span className='AI'>Initial Value</span>
+                                <span className='TG ms-5'>Final Value</span>
+                            </div>
 
-                            {/* <PieChart width={300} height={250} className='chart'>
-                            <Pie
-                                data={data02}
-                                // cx={200}
-                                // cy={180}
-                                innerRadius={60}
-                                outerRadius={100}
-                                paddingAngle={0}
-                                dataKey="value">
-                                {data02.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart> */}
-
-                            <PieChart width={600} height={400}>
+                            <PieChart width={300} height={250} className='chart'>
                                 <Pie
-                                    activeIndex={activeIndex}
-                                    activeShape={renderActiveShape}
                                     data={data02}
-                                    cx={320}
-                                    cy={200}
+                                    // cx={200}
+                                    // cy={180}
                                     innerRadius={60}
-                                    outerRadius={80}
-                                    fill="#0088FE"
-                                    dataKey="value"
-                                    onMouseEnter={onPieEnter}
-                                />
+                                    outerRadius={100}
+                                    paddingAngle={0}
+                                    dataKey="value">
+                                    {data02.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip />
                             </PieChart>
+
+
 
                         </div>
                     </div>

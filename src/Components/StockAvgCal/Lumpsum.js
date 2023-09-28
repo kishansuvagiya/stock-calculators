@@ -108,7 +108,7 @@ function Lumpsum() {
               </div>
             </div>
 
-            <div className='col-lg-4'>
+            <div className='col-lg-4 mt-lg-0 mt-4'>
               <div className='text-center mt-3'>
                 <span className='AI'>Amount invested</span>
                 <span className='TG ms-5'>Total Gain</span>

@@ -3,80 +3,7 @@ import Slider from '@mui/material/Slider';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Tooltip, PieChart, Pie, Cell, Sector } from 'recharts';
-
-const renderActiveShape = (props) => {
-    const RADIAN = Math.PI / 180;
-    const {
-        cx,
-        cy,
-        midAngle,
-        innerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        fill,
-        payload,
-        percent,
-        value
-    } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
-
-    return (
-        <g>
-            <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-                {payload.name}
-            </text>
-            <Sector
-                cx={cx}
-                cy={cy}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                fill='#00C49F'
-            />
-            <Sector
-                cx={cx}
-                cy={cy}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                innerRadius={outerRadius + 6}
-                outerRadius={outerRadius + 12}
-                fill='#00C49F'
-            />
-            <path
-                d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-                stroke={fill}
-                fill="none"
-            />
-            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                textAnchor={textAnchor}
-                fill="#333"
-            >{`₹ ${value}`}</text>
-            <text
-                x={ex + (cos >= 0 ? 1 : -1) * 12}
-                y={ey}
-                dy={18}
-                textAnchor={textAnchor}
-                fill="#999"
-            >
-                {`(${(percent * 100).toFixed(2)}%)`}
-            </text>
-        </g>
-    );
-};
+import { Tooltip, PieChart, Pie, Cell } from 'recharts';
 
 function CAGRcal() {
     const [data, setData] = useState({
@@ -98,16 +25,7 @@ function CAGRcal() {
         { name: "Initial Value", value: data.initialAmount },
         { name: "Final Value", value: data.fianlAmount }
     ];
-    // const COLORS = ["#0088FE", "#00C49F"];
-
-    const [activeIndex, setActiveIndex] = useState(0);
-    const onPieEnter = useCallback(
-        (_, index) => {
-            setActiveIndex(index);
-        },
-        [setActiveIndex]
-    );
-
+    const COLORS = ["#0088FE", "#00C49F"];
 
     return (
         <div>
@@ -158,16 +76,16 @@ function CAGRcal() {
                         </div>
                     </div>
 
-                    <div className='col-md-6 mt-4 mt-md-0'>
-                        {/* <div className='text-center mt-3'>
+
+                    <div className='col-md-6 mt-md-0 mt-4'>
+                        <div className='text-center mt-3'>
                             <span className='AI'>Initial Value</span>
                             <span className='TG ms-5'>Final Value</span>
-                        </div> */}
-
-                        {/* <PieChart width={300} height={250} className='chart'>
+                        </div>
+                        <PieChart width={300} height={250} className='chart'>
                             <Pie
                                 data={data02}
-                                // cx={200}
+                                // cx={190}
                                 // cy={180}
                                 innerRadius={60}
                                 outerRadius={100}
@@ -178,24 +96,9 @@ function CAGRcal() {
                                 ))}
                             </Pie>
                             <Tooltip />
-                        </PieChart> */}
-
-                        <PieChart width={600} height={400}>
-                            <Pie
-                                activeIndex={activeIndex}
-                                activeShape={renderActiveShape}
-                                data={data02}
-                                cx={300}
-                                cy={200}
-                                innerRadius={60}
-                                outerRadius={80}
-                                fill="#0088FE"
-                                dataKey="value"
-                                onMouseEnter={onPieEnter}
-                            />
                         </PieChart>
-
                     </div>
+                    
                 </div>
             </div>
         </div>
