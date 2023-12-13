@@ -11,6 +11,7 @@ function StockAvgCal() {
         secondprice: "",
     })
 
+    const [zero, setZero] = useState(true)
     const [error, setError] = useState(false)
 
     const inputHandler = (e) => {
@@ -18,19 +19,13 @@ function StockAvgCal() {
         setData({
             ...data, [name]: value
         })
-
     }
-
-    const [text, settext] = useState([])
-
-    const [zero, setZero] = useState(true)
 
     const avgResult = () => {
         if (data.firstunit.length == 0 || data.firstprice.length == 0 || data.secondprice.length == 0 || data.secondunit.length == 0) {
             setError(true)
         }
         else {
-            settext([...text, data])
             setZero(false)
             setError(false)
         }
@@ -42,21 +37,17 @@ function StockAvgCal() {
             secondunit: "",
             secondprice: "",
         })
-        settext([])
         setZero(true)
         setError(false)
     }
 
     let Amount1, Amount2, TotalUnit, TotalAmount, AvgPrice;
 
-    text.map((text) => {
-        Amount1 = Math.round(Number(text.firstprice) * Number(text.firstunit))
-        Amount2 = Math.round(Number(text.secondprice) * Number(text.secondunit))
-        TotalUnit = Number(text.firstunit) + Number(text.secondunit)
+        Amount1 = Math.round(Number(data.firstprice) * Number(data.firstunit))
+        Amount2 = Math.round(Number(data.secondprice) * Number(data.secondunit))
+        TotalUnit = Number(data.firstunit) + Number(data.secondunit)
         TotalAmount = Amount1 + Amount2
         AvgPrice = (TotalAmount / TotalUnit).toFixed(2)
-
-    })
 
     function comma(num) {
         let x = num.toString();
